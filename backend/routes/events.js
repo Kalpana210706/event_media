@@ -5,7 +5,7 @@ const { verifyRole } = require('./middleware'); // Ensures clean relative tracki
 const router = express.Router();
 const prisma = new PrismaClient();
 
-// 📁 1. GET ALL CAMPUS EVENTS
+//  1. GET ALL CAMPUS EVENTS
 router.get('/', async (req, res) => {
     try {
         const events = await prisma.event.findMany({
@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// 📁 2. CREATE NEW CAMPUS EVENT ENTRY NODE
+//  2. CREATE NEW CAMPUS EVENT ENTRY NODE
 router.post('/', verifyRole(['ADMIN', 'PHOTOGRAPHER']), async (req, res) => {
     try {
         const { name, description, category } = req.body;
@@ -30,7 +30,7 @@ router.post('/', verifyRole(['ADMIN', 'PHOTOGRAPHER']), async (req, res) => {
         // Example: "Sports Meet" -> "SPORTS_MEET"
         let mappedCategory = String(category).toUpperCase().replace(/\s+/g, '_');
 
-        // 🔥 FIX: Required 'date' argument setup. Current date standard backup logic inject kiya hai.
+        //  FIX: Required 'date' argument setup. Current date standard backup logic inject kiya hai.
         const eventDate = new Date(); 
 
         // Database insertion matching exact constraints
@@ -55,5 +55,5 @@ router.post('/', verifyRole(['ADMIN', 'PHOTOGRAPHER']), async (req, res) => {
     }
 });
 
-// 🔥 SAFE BINDING CORRECTION FIX: Makes sure Express doesn't crash on app.use handler parsing
+//  SAFE BINDING CORRECTION FIX: Makes sure Express doesn't crash on app.use handler parsing
 module.exports = router;

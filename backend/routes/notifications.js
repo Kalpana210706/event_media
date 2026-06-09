@@ -3,7 +3,7 @@ const { PrismaClient } = require('@prisma/client');
 const router = express.Router();
 const prisma = new PrismaClient();
 
-// 🔔 1. Get User's Notifications
+// 1. Get User's Notifications
 router.get('/:userId', async (req, res) => {
     try {
         const { userId } = req.params;

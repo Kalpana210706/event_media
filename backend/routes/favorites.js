@@ -3,7 +3,7 @@ const { PrismaClient } = require('@prisma/client');
 const router = express.Router();
 const prisma = new PrismaClient();
 
-// ❤️ 1. Toggle Favorite (Add ya Remove karne ke liye ek hi route)
+// 1. Toggle Favorite (Add ya Remove karne ke liye ek hi route)
 router.post('/toggle', async (req, res) => {
     try {
         const { userId, mediaId } = req.body;
@@ -31,7 +31,7 @@ router.post('/toggle', async (req, res) => {
     }
 });
 
-// 📂 2. Get User's All Favorites
+//  2. Get User's All Favorites
 router.get('/:userId', async (req, res) => {
     try {
         const { userId } = req.params;
