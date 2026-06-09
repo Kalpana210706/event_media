@@ -34,7 +34,7 @@ const FacialSearch = ({ eventId }) => {
         try {
             // Humare backend routing matrix call mapping
             const token = localStorage.getItem('token'); // Agar headers me JWT chahiye ho
-            const response = await axios.post(`http://localhost:5000/api/media/event/${eventId}/find-me`, formData, {
+            const response = await axios.post(`https://event-media-1.onrender.com/api/media/event/${eventId}/find-me`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: token ? `Bearer ${token}` : ''
@@ -122,7 +122,7 @@ const FacialSearch = ({ eventId }) => {
                     {matchedPhotos.map((photo) => (
                         <div key={photo.id} style={{ background: '#1f2937', borderRadius: '8px', overflow: 'hidden', border: '1px solid #374151' }}>
                             <img 
-                                src={`http://localhost:5000${photo.url}`} 
+                                src={`https://event-media-1.onrender.com${photo.url}`} 
                                 alt="Matched Snap" 
                                 style={{ width: '100%', height: '150px', objectFit: 'cover' }} 
                             />

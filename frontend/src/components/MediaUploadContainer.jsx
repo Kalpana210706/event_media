@@ -87,7 +87,7 @@ function MediaUploadContainer({ eventId, onUploadSuccess }) {
       const token = localStorage.getItem('token');
       
       // Axios request with progress bar hooks
-      const response = await axios.post('http://localhost:5000/api/media/bulk-upload', formData, {
+      const response = await axios.post('https://event-media-1.onrender.com/api/media/bulk-upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`

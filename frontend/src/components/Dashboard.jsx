@@ -20,7 +20,7 @@ function Dashboard() {
   // Fetch all campus events from backend
   const fetchEvents = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/events'); 
+      const res = await fetch('https://event-media-1.onrender.com/api/events'); 
       const data = await res.json();
       if (Array.isArray(data)) {
         setEvents(data);
@@ -57,7 +57,7 @@ function Dashboard() {
 
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/api/events', {
+      const res = await fetch('https://event-media-1.onrender.com/api/events', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -67,7 +67,7 @@ function EventGallery() {
         headers['Authorization'] = `Bearer ${activeToken.trim()}`;
       }
 
-      const res = await fetch(`http://localhost:5000/api/media/event/${id}`, {
+      const res = await fetch(`https://event-media-1.onrender.com/api/media/event/${id}`, {
         method: 'GET',
         headers: headers
       });
@@ -196,7 +196,7 @@ function EventGallery() {
     });
 
     try {
-      const response = await axios.post('http://localhost:5000/api/media/bulk-upload', formData, {
+      const response = await axios.post('https://event-media-1.onrender.com/api/media/bulk-upload', formData, {
         headers: {
           'Authorization': `Bearer ${activeToken.trim()}`,
           'Content-Type': 'multipart/form-data'
@@ -253,7 +253,7 @@ function EventGallery() {
     try {
       const activeToken = localStorage.getItem('token');
       
-      const response = await axios.post(`http://localhost:5000/api/media/event/${id}/find-me`, formData, {
+      const response = await axios.post(`https://event-media-1.onrender.com/api/media/event/${id}/find-me`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': activeToken ? `Bearer ${activeToken.trim()}` : ''
@@ -280,7 +280,7 @@ function EventGallery() {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/media/like', {
+      const response = await fetch('https://event-media-1.onrender.com/api/media/like', {
         // Updated to matching endpoint dynamic method handling paradigm
         method: 'POST',
         headers: {
@@ -321,7 +321,7 @@ function EventGallery() {
 
     const token = localStorage.getItem('token');
     try {
-      const res = await fetch(`http://localhost:5000/api/media/${targetMediaId}/comment`, {
+      const res = await fetch(`https://event-media-1.onrender.com/api/media/${targetMediaId}/comment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -346,7 +346,7 @@ function EventGallery() {
     
     const token = localStorage.getItem('token');
     try {
-      const res = await fetch(`http://localhost:5000/api/media/${mediaId}`, {
+      const res = await fetch(`https://event-media-1.onrender.com/api/media/${mediaId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token.trim()}`
@@ -363,7 +363,7 @@ function EventGallery() {
   };
 
   const handleShareMedia = (mediaUrl) => {
-    const absoluteLink = mediaUrl.startsWith('http') ? mediaUrl : `http://localhost:5000${mediaUrl.startsWith('/') ? mediaUrl : '/' + mediaUrl}`;
+    const absoluteLink = mediaUrl.startsWith('http') ? mediaUrl : `https://event-media-1.onrender.com${mediaUrl.startsWith('/') ? mediaUrl : '/' + mediaUrl}`;
     if (navigator.clipboard) {
       navigator.clipboard.writeText(absoluteLink);
       triggerNotification("🔗 Direct share link copied to clipboard safely!", "success");
@@ -381,7 +381,7 @@ function EventGallery() {
 
       const imageElement = new Image();
       imageElement.crossOrigin = "anonymous"; 
-      imageElement.src = mediaUrl.startsWith('http') ? mediaUrl : `http://localhost:5000${mediaUrl.startsWith('/') ? mediaUrl : '/' + mediaUrl}`;
+      imageElement.src = mediaUrl.startsWith('http') ? mediaUrl : `https://event-media-1.onrender.com${mediaUrl.startsWith('/') ? mediaUrl : '/' + mediaUrl}`;
 
       imageElement.onload = () => {
         const canvas = document.createElement('canvas');
@@ -424,13 +424,13 @@ function EventGallery() {
       imageElement.onerror = () => {
         console.warn("⚠️ Canvas pipeline processing hit CORS restrictions, processing default stream.");
         const directFilename = mediaUrl.split('/').pop();
-        window.open(`http://localhost:5000/api/media/download/${directFilename}`, '_blank');
+        window.open(`https://event-media-1.onrender.com/api/media/download/${directFilename}`, '_blank');
       };
 
     } catch (processingFault) {
       console.error("Critical fault inside local watermarking engine:", processingFault);
       const directFilename = mediaUrl.split('/').pop();
-      window.open(`http://localhost:5000/api/media/download/${directFilename}`, '_blank');
+      window.open(`https://event-media-1.onrender.com/api/media/download/${directFilename}`, '_blank');
     }
   };
 
@@ -467,7 +467,7 @@ function EventGallery() {
   const renderPhotoCard = (item) => {
     const currentMediaId = item.id || item._id;
     const cleanUrl = item.url?.startsWith('/') ? item.url : `/${item.url}`;
-    const parsedImageSrc = item.url?.startsWith('http') ? item.url : `http://localhost:5000${cleanUrl}`;
+    const parsedImageSrc = item.url?.startsWith('http') ? item.url : `https://event-media-1.onrender.com${cleanUrl}`;
 
     const tagArray = Array.isArray(item.tags) 
       ? item.tags 
