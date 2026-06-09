@@ -1,0 +1,111 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// 👤 1. User Table (Updated with Favorite and Notification relations)
+model User {
+  id            String         @id @default(uuid())
+  email         String         @unique
+  password      String
+  name          String
+  role          String         @default("VIEWER") // VIEWER, CLUB_MEMBER, PHOTOGRAPHER, ADMIN
+  createdAt     DateTime       @default(now())
+
+  // Relationships tracks
+  favorites     Favorite[]
+  notifications Notification[]
+}
+
+// 📅 2. Event Table
+model Event {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  date        DateTime
+  category    String
+  access      String   @default("PUBLIC")
+  createdAt   DateTime @default(now())
+  
+  // Connect Event to Albums and Media
+  albums      Album[]
+  media       Media[]
+}
+
+// 📂 3. Album Table
+model Album {
+  id        String   @id @default(uuid())
+  name      String
+  eventId   String
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  media     Media[]
+  createdAt DateTime @default(now())
+}
+
+// 🖼️ 4. Media Table (Updated with automated smart tags layer)
+model Media {
+  id        String   @id @default(uuid())
+  url       String   
+  fileType  String   
+  eventId   String
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  albumId   String?
+  album     Album?   @relation(fields: [albumId], references: [id], onDelete: SetNull)
+  
+  // 🏷️ AI SMART IMAGE TAGS ARRAY SYSTEM
+  tags      String[] @default([])
+  
+  createdAt DateTime @default(now())
+
+  // Relation tracks
+  comments  Comment[]
+  likes     Like[]
+  favorites Favorite[]
+}
+
+// 💬 5. Comment Table
+model Comment {
+  id        String   @id @default(uuid())
+  text      String
+  userId    String
+  mediaId   String
+  media     Media    @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+// 👍 6. Like Table
+model Like {
+  id      String @id @default(uuid())
+  userId  String
+  mediaId String
+  media   Media  @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, mediaId]) // Keeps users from liking a photo multiple times
+}
+
+// ❤️ 7. Favorite Table (Connected back to User table)
+model Favorite {
+  id      String @id @default(uuid())
+  userId  String
+  mediaId String
+  media   Media  @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, mediaId]) // Keeps users from adding a photo to favorites multiple times
+}
+
+// 🔔 8. Notification Table (Newly Added)
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  title     String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
