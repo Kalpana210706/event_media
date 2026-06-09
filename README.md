@@ -142,31 +142,6 @@ event_media/
 
 ---
 
-## 📸 Screenshots
-
-Add project screenshots here.
-
-### Home Page
-
-![Home](<img width="1918" height="895" alt="image" src="https://github.com/user-attachments/assets/46700b61-6a86-4630-a6a6-a711c2fbd902" />
-)
-
-### Dashboard
-
-![Dashboard](<img width="1667" height="907" alt="image" src="https://github.com/user-attachments/assets/af866e5f-b6cc-4acb-b8be-997c0a831d44" />
-)
-
-### Event Gallery
-
-![Gallery](<img width="1632" height="902" alt="image" src="https://github.com/user-attachments/assets/32219be0-84c9-4bfc-9ab1-628c775fbdb5" />
-)
-![Gallery](<img width="1712" height="862" alt="image" src="https://github.com/user-attachments/assets/f7ace4e4-d2c9-47b9-9a4d-36a96797345c" />
-)
-![Gallery](<img width="1755" height="867" alt="image" src="https://github.com/user-attachments/assets/25ceabb7-37b6-4712-81a3-0c8310af9f35" />
-)
-
-
----
 
 ## 👩‍💻 Developed By
 
