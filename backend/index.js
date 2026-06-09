@@ -1,30 +1,3 @@
-// const express = require('express');
-// const app = express();
-// const cors = require('cors');
-// const { PrismaClient } = require('@prisma/client');
-// const authRoutes = require('./routes/auth');
-// const eventRoutes = require('./routes/events');
-// const mediaRoutes = require('./routes/media'); // <-- 1. Import media routes
-// require('dotenv').config();
-
-// const app = express();
-// const prisma = new PrismaClient();
-// const PORT = process.env.PORT || 5000;
-
-// app.use(cors());
-// app.use(express.json());
-
-// app.use('/api/auth', authRoutes);
-// app.use('/api/events', eventRoutes);
-// app.use('/api/media', mediaRoutes); // <-- 2. Register media endpoints
-
-// app.get('/', (req, res) => {
-//     res.send('🚀 Event & Media Management API is running smoothly!');
-// });
-
-// app.listen(PORT, () => {
-//     console.log(`Server is happily running on http://localhost:${PORT}`);
-// });
 
 const express = require('express');
 const cors = require('cors');
